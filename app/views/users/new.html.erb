@@ -1,0 +1,11 @@
+<h2>Log in</h2>
+
+<%= form_tag user_session_path do %>
+
+    <%= email_field_tag :email, placeholder: "Email" %> <br/>
+
+    <%= password_field_tag :password, placeholder: "Password" %><br/>
+
+    <%= submit_tag %>
+
+<% end %>

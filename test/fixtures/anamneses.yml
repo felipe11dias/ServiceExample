@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  boolean_example: false
+  boolean_exampletwo: false
+  integer_example: 1
+  user: one
+
+two:
+  boolean_example: false
+  boolean_exampletwo: false
+  integer_example: 1
+  user: two
