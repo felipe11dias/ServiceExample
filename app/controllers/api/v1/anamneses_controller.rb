@@ -6,6 +6,9 @@ class Api::V1::AnamnesesController < ApiController
     def create
       @anamnese = Anamnese.new(anamnese_params)
       if @anamnese.save
+        @update = Update.where(user_id: current_user.id).first
+        @update.anamnese_update = Time.now
+        @update.update
         redirect_to @anamnese
         render json: @anamnese, status: "Success"
       else
@@ -35,20 +38,20 @@ class Api::V1::AnamnesesController < ApiController
       end
     end
 
-  end
-
-  def verificar_admin
-    if not current_user.is_admin?
-      render json: { "message" => "Você não é um administrador!"}
+    private
+    def verificar_admin
+      if not current_user.is_admin?
+        render json: { "message" => "Você não é um administrador!"}
+      end
     end
-  end
-
-  def verificar_usuario_dono
-    if not anamnese.id == current_user.id?
-      render json: {"message" => "Você não é o usuario dono desse conteudo!"}
-  end
-
-  def anamnese_params
-    params.require(:anamnese).permit(:boolean_example, :boolean_exampletwo,:integer_example)
-  end
+    private
+    def verificar_usuario_dono
+      if not anamnese.id == current_user.id?
+        render json: {"message" => "Você não é o usuario dono desse conteudo!"}
+      end
+    end
+    private
+    def anamnese_params
+      params.require(:anamnese).permit(:boolean_example, :boolean_exampletwo,:integer_example)
+    end
 end

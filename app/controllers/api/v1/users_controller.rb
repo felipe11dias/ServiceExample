@@ -1,7 +1,7 @@
 class Api::V1::UsersController < ApiController
   before_action :authenticate_user!
   before_action :verificar_admin, only: [:update, :destroy]
-  
+
   def create
     @user = User.new(user_params)
     if @user.save
@@ -34,14 +34,15 @@ class Api::V1::UsersController < ApiController
     end
   end
 
-end
-
-def verificar_admin
-  if not current_user.is_admin?
-    render json: { "message" => "Você não é um administrador!"}
+  private
+  def verificar_admin
+    if not current_user.is_admin?
+      render json: { "message" => "Você não é um administrador!"}
+    end
   end
-end
 
-def user_params
-  params.require(:user).permit(:email, :password, :password_confirmation, :name, :authenticity_tokens, :address, :birth_day)
+  private
+  def user_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :name, :authenticity_tokens, :address, :birth_day)
+  end
 end

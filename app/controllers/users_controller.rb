@@ -31,14 +31,16 @@ class UsersController < ApplicationController
     end
   end
 
-end
-
-def verificar_admin
-  if not current_user.is_admin?
-    render json: { "message" => "Você não é um administrador!"}
+  private
+  def verificar_admin
+    if not current_user.is_admin?
+      render json: { "message" => "Você não é um administrador!"}
+    end
   end
-end
 
-def user_params
-  params.require(:user).permit(:email, :password, :password_confirmation, :name, :authenticity_tokens, :address, :birth_day)
+  private
+  def user_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :name, :authenticity_tokens, :address, :birth_day)
+  end
+  
 end

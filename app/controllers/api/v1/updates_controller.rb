@@ -32,9 +32,8 @@ class Api::V1::UpdatesController < ApiController
       render json: { head :no_content }
     end
   end
-
-end
-
-def update_params
-  params.require(:update).permit(:anamneses_update, :example_update)
+  private
+  def update_params
+    params.require(:update).permit(:anamneses_update, :example_update)
+  end
 end
